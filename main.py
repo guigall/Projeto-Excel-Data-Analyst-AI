@@ -12,6 +12,10 @@ Uso
 
 import sys
 import os
+import io
+
+# Força stdout a usar UTF-8 no Windows para suportar caracteres especiais
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 # Garante que src/ seja importável ao rodar a partir da raiz do projeto
 sys.path.insert(0, os.path.dirname(__file__))

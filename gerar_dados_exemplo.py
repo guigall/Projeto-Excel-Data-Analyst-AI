@@ -75,6 +75,7 @@ df.loc[1, "quantidade"] = -5
 
 # 5. Cria uma aba alternativa com tipo misto para demonstração
 df_bagunca = df.copy()
+df_bagunca["preco_unitario"] = df_bagunca["preco_unitario"].astype(object)
 df_bagunca.loc[2, "preco_unitario"] = "N/D"  # tipo misto
 
 # ── Salvar ────────────────────────────────────────────────────────────────────

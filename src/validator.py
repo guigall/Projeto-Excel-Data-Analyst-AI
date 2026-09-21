@@ -78,9 +78,16 @@ def validar(df: pd.DataFrame) -> list[dict]:
         q3 = serie.quantile(0.75)
         iqr = q3 - q1
         if iqr == 0:
-            continue
-        limite_inferior = q1 - 1.5 * iqr
-        limite_superior = q3 + 1.5 * iqr
+            # Fallback: usa média ± 3 desvios padrão
+            media = serie.mean()
+            std = serie.std()
+            if std == 0:
+                continue
+            limite_inferior = media - 3 * std
+            limite_superior = media + 3 * std
+        else:
+            limite_inferior = q1 - 1.5 * iqr
+            limite_superior = q3 + 1.5 * iqr
         outliers = serie[(serie < limite_inferior) | (serie > limite_superior)]
         if not outliers.empty:
             problemas.append(_problema(

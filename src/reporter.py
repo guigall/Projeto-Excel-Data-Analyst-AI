@@ -74,8 +74,8 @@ def construir_relatorio_texto(
     if analise["resumo_categorico"]:
         for col, info in analise["resumo_categorico"].items():
             linhas.append(f"  [{col}] — {info['qtd_unicos']} valor(es) único(s)")
-            for val, cnt in info["valores_mais_frequentes"].items():
-                linhas.append(f"    • {val}: {cnt}")
+            for item in info["valores_mais_frequentes"]:
+                linhas.append(f"    • {item['valor']}: {item['frequencia']}")
             linhas.append("")
     else:
         linhas.append("  Nenhuma coluna categórica encontrada.")
